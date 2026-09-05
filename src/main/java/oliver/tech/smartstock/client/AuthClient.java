@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "AuthClient", url = "${api.auth-url}")
+@FeignClient(name = "AuthClient", url = "${api.client-url}")
 public interface AuthClient {
 
     @PostMapping(path = "/api/token")
