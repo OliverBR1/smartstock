@@ -3,6 +3,7 @@ package oliver.tech.smartstock.service;
 import oliver.tech.smartstock.client.AuthClient;
 import oliver.tech.smartstock.client.dto.AuthRequest;
 import oliver.tech.smartstock.config.AppConfig;
+import oliver.tech.smartstock.exception.SmartStockException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -44,10 +45,12 @@ public class AuthService {
         var response = authClient.authenticate(request);
 
         if(!response.getStatusCode().is2xxSuccessful()) {
-
+            throw  new SmartStockException("cannot generate token, " +
+                    "status: " + response.getStatusCode() +
+                    "response: " + response.getBody());
         }
 
-        token = "";
-        expiresIn = null;
+        token = response.getBody().accessToken();
+        expiresIn = LocalDateTime.now().plusSeconds(response.getBody().expireIn());
     }
 }
