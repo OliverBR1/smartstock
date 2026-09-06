@@ -22,7 +22,7 @@ public class StartController {
     public ResponseEntity<Void> start(@RequestBody StartDto dto){
 
         CompletableFuture.runAsync(() -> {
-           smartStockService.start(dto.reportPath());
+            smartStockService.start(dto.reportPath());
         });
 
         return ResponseEntity.accepted().build();
