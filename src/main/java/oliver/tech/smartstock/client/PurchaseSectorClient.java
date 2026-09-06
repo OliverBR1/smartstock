@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "PurchaseSectorClient", url = "${api.purchase-sector-url}")
 public interface PurchaseSectorClient {
 
-     @PostMapping(name = "/api/purchases")
+     @PostMapping(path = "/api/purchases")
      ResponseEntity<PurchaseResponse> sendPurchaseRequest(@RequestHeader("Authorization") String token,
                                                           @RequestBody PurchaseRequest request);
 }
